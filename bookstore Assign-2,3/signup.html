@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #2C3E50;
+    
+    padding: 0;
+    margin: 0;
+  }
+
+  .login-page{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+  }
+
+  .navbar {
+    background-color: #333;
+    overflow: hidden;
+  }
+  .navbar a {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  .navbar a:hover {
+    background-color: #ddd;
+    color: black;
+  }
+  .header {
+    text-align: center;
+    padding: 60px;
+    background: #1abc9c;
+    color: white;
+    font-size: 30px;
+  }
+  .login-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+    width: 400px;
+
+  }
+  h2 {
+    color: #2C3E50; 
+    text-align: center; 
+    padding-right: 30px;
+
+  }
+  .input-group {
+    margin-bottom: 20px; 
+  }
+  .input-group label,
+  .input-group input,
+  .input-group button,
+  .registration-text,
+  .facebook-login {
+    display: block; 
+    width: 90%; 
+    text-align: center; 
+  }
+  .input-group input{
+    padding: 10px; 
+    margin-top: 5px; 
+    margin-bottom: 10px;  
+    border-radius: 5px;  
+    border: 1px solid #ddd; 
+  }
+  .login-btn {
+    background-color: #2980B9;  
+    color: white;  
+    padding: 10px;  
+    border: none;   
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .registration-text {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+</style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html">Home</a>
+        <a href="catalogue.html">Catalogue</a>
+        <a href="login.html">Login</a>
+        <a href="#signup">Signup</a>
+      </div>
+      
+      <div class="header">
+        <h1>WELCOME TO BOOK STORE</h1>
+      </div>
+
+  <div class="login-page">  
+  <div class="login-container">
+    <h2>Signup</h2>
+    <form id="registrationForm" onsubmit="return validateForm()">
+    <div class="input-group">
+        <label for="username">Username</label>
+        <input type="username" id="name" name="username" required><span id="nameError" class="error"></span>
+      </div>
+    <div class="input-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required><span id="emailError" class="error"></span>
+    </div>
+    <div class="input-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required><span id="passwordError" class="error"></span>
+    </div>
+    <div class="input-group">
+        <label for="phone">Phone No</label>
+        <input type="tel" id="phone" name="phone" required><span id="phoneError" class="error"></span>
+      </div>
+    <input type="submit" value="Submit">
+</form>
+    <!-- <button class="login-btn"><input type="submit" value="Submit"></button> -->
+    <div class="registration-text">
+      Already have an account? <a href="login.html">Login</a>
+    </div>
+  </div>
+  </div>
+  <script>
+    function validateForm() {
+      var name = document.getElementById('name').value;
+      var password = document.getElementById('password').value;
+      var email = document.getElementById('email').value;
+      var phone = document.getElementById('phone').value;
+      
+      var nameRegex = /^[a-zA-Z ]{6,}$/;
+      var passwordRegex = /^.{6,}$/;
+      var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      var phoneRegex = /^\d{10}$/;
+      
+      var isValid = true;
+      
+      if (!nameRegex.test(name)) {
+        document.getElementById('nameError').innerText = "Name should contain alphabets only and the length should not be less than 6 characters.";
+        isValid = false;
+      } else {
+        document.getElementById('nameError').innerText = "";
+      }
+      
+      if (!passwordRegex.test(password)) {
+        document.getElementById('passwordError').innerText = "Password should not be less than 6 characters.";
+        isValid = false;
+      } else {
+        document.getElementById('passwordError').innerText = "";
+      }
+      
+      if (!emailRegex.test(email)) {
+        document.getElementById('emailError').innerText = "Invalid email format.";
+        isValid = false;
+      } else {
+        document.getElementById('emailError').innerText = "";
+      }
+      
+      if (!phoneRegex.test(phone)) {
+        document.getElementById('phoneError').innerText = "Phone number should contain 10 digits only.";
+        isValid = false;
+      } else {
+        document.getElementById('phoneError').innerText = "";
+      }
+      
+      return isValid;
+    }
+  
+    // Attaching the validateForm function to form submission event
+    document.querySelector('.login-container form').addEventListener('submit', function(event) {
+      if (!validateForm()) {
+        event.preventDefault(); // Prevent form submission if validation fails
+      }
+    });
+  </script>
+  
+</body>
+</html>
